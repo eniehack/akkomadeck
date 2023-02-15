@@ -16,7 +16,8 @@
  import { Sortable } from "sortablejs";
  import { onMount } from "svelte";
 
- let panels;
+ let panels: HTMLElement;
+
  onMount(async () => {
      Sortable.create(panels, {
          group: {

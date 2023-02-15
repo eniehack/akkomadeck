@@ -15,7 +15,7 @@ export const UserStorageItemSchema: JTDSchemaType<UserStorageItem> = {
     },
 }
 
-export const UserStorageItemSerializer = (data) => {
+export const UserStorageItemSerializer = (data : any) => {
     let serialize = ajv.compileSerializer(UserStorageItemSchema)
     return serialize(data);
 }
@@ -39,7 +39,7 @@ export const ClientStorageItemSchema: JTDSchemaType<ClientStorageItem> = {
     }
 }
 
-export const ClientStorageItemSerializer = (data) => {
+export const ClientStorageItemSerializer = (data :any) => {
     let serialize = ajv.compileSerializer(ClientStorageItemSchema)
     return serialize(data);
 }
