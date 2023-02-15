@@ -14,7 +14,8 @@
  }
 .panel {
      margin: 0;
-     width: 100%;
+     /* width: 100%; */
+     width: 350px;
      /*height: calc(100% - 2px);*/
      max-height: 100vh;
      overflow-x: hidden;
