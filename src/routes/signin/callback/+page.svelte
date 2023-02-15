@@ -21,6 +21,7 @@
             let server_url = new URL(client.server_url)
             let resp = await fetch_access_token(
                 server_url,
+                code,
                 {id: client.client_id, secret: client.client_secret} as OAuthClient
             );
             let user = UserStorageItemSerializer({oauth_code: code, token: resp.access_token, server_url: client.server_url})
