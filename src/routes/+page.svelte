@@ -66,9 +66,9 @@
             let user = UserStorageItemParse(user_str);
             if (typeof user === "undefined") return;
 
-            let params = new URLSearchParams();
-            params.append("access_token", user.token);
-            params.append("stream", "user");
+            let params = new URLSearchParams({
+                access_token: user.token,
+            });
 
             let ws_url = new URL(user.server_url);
             ws_url.protocol = "wss:";
@@ -80,7 +80,7 @@
             ws.onopen = (event) => {
                 console.debug("ws start")
                 console.log(event)
-                //ws.send(JSON.stringify({"type": "subscribe", "stream": "user"}))
+                ws.send(JSON.stringify({"type": "subscribe", "stream": "user"}))
             };
             ws.onerror = (event) => {
                 console.error(event);

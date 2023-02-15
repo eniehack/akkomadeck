@@ -23,11 +23,12 @@ type TokenEntity = {
 
 export const create_client = async (host: URL, client_url: URL) => {
     const client_name = "akkomadeck";
-    let client_create_body = new URLSearchParams();
-    client_create_body.append("client_name", client_name);
-    client_create_body.append("redirect_uris", client_url.toString() + "signin/callback");
-    client_create_body.append("scopes", "read write push")
-    client_create_body.append("website", "https://github.com/eniehack/akkomadeck")
+    let client_create_body = new URLSearchParams({
+        client_name: client_name,
+        redirect_uris: client_url.toString() + "signin/callback",
+        scopes: "read write push",
+        website: "https://github.com/eniehack/akkomadeck",
+    });
     let resp = await fetch(host.toString() + "api/v1/apps", {
         method: "POST",
         body: client_create_body,
