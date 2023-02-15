@@ -13,7 +13,7 @@
 </style>
 
 <script lang="ts">
- import { Sortable } from "sortablejs";
+ import  Sortable from "sortablejs";
  import { onMount } from "svelte";
 
  let panels: HTMLElement;
