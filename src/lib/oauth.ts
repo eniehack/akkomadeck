@@ -49,7 +49,13 @@ export const authorize_url = (server: URL, client_id: string, client_url: URL) =
     return new URL(`${server.toString()}oauth/authorize?${params.toString()}`);
 }
 
-export const fetch_access_token = async (server_url: URL, code: string, client: OAuthClient) => {
+export const fetch_access_token = async (
+        fetch: (input: URL | RequestInfo, init?: RequestInit | undefined) => Promise<Response>, 
+        server_url: URL,
+        code: string,
+        client: OAuthClient
+    ) => {
+
     let fetch_access_token_body = new URLSearchParams({
         client_id: client.id,
         client_secret: client.secret,
@@ -67,14 +73,18 @@ export const fetch_access_token = async (server_url: URL, code: string, client: 
     });
 
     return await resp.json() as TokenEntity;
-
 }
 
-export const verify_credentials = async (server_url: URL, oauth_token: string) => {
+export const verify_credentials = async (
+        fetch: (input: URL | RequestInfo, init?: RequestInit | undefined) => Promise<Response>,
+        server_url: URL,
+        oauth_token: string
+    ) => {
+
     let resp = await fetch(`${server_url.toString()}api/v1/apps/verify_credentials`, {
         headers: {
             "Authorization": `Bearer ${oauth_token}`,
         }
     });
-    return await resp.ok;
+    return resp.ok;
 }
