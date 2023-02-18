@@ -13,8 +13,18 @@
     const submit = async () => {
         let server_url = new URL(`https://${instance_name}/`);
         console.log(server_url.toString());
-        let client_url_str = import.meta.env.PROD ? import.meta.env.CLIENT_URL : "http://localhost:5173";
+        let client_url_str: string;
+        if (import.meta.env.PROD) {
+            if (import.meta.env.VITE_VERCEL === "1") {
+                client_url_str = import.meta.env.VITE_VERCEL_URL
+            } else {
+                client_url_str = import.meta.env.VITE_CLIENT_URL
+            }
+        } else {
+            client_url_str = "http://localhost:5173";
+        }
         console.log(client_url_str);
+        console.log(import.meta.env.CLIENT_URL);
         let client_url = new URL(client_url_str)
         let resp = await create_client(server_url, client_url);
         if (resp === null) {

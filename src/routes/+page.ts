@@ -30,6 +30,3 @@ export const load = (async ({fetch}) => {
         }
     }
 }) satisfies PageLoad;
-
-export const ssr = false;
-export const csr = true;
