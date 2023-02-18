@@ -8,7 +8,7 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		adapter: import.meta.env.VITE_VERCEL_URL === undefined
+		adapter: typeof import.meta.env.VITE_VERCEL_URL === "undefined"
 			? adapter({
 				pages: "build",
 				assets: "build",
