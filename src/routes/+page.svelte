@@ -5,7 +5,6 @@
 <script lang="ts">
     import PanelsContainer from "$lib/PanelsContainer.svelte";
     import Panel from "$lib/Panel.svelte";
-    import Note from "$lib/Note.svelte";
 	import { UserStorageItemParse } from "$lib/localstorage";
 	import { onDestroy, onMount } from "svelte";
 	import { browser } from "$app/environment";

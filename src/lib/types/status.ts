@@ -3,9 +3,6 @@ import type MediaAttachment from "./media_attachment";
 import type Tag from "./tag";
 import type CustomEmoji from "./custom_emoji";
 import type Poll from "./poll";
-import Ajv, { type JSONSchemaType } from "ajv";
-
-const ajv = new Ajv();
 
 interface Application {
     name: string,
