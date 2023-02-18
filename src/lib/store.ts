@@ -3,4 +3,5 @@ import type Status from "./types/status";
 
 export const token: Writable<string> = writable("");
 export const notes: Writable<Map<string, Status>> = writable(new Map<string, Status>());
+export const notes_order: Writable<string[]> = writable([]);
 export const server_url: Writable<URL> = writable();

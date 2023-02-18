@@ -8,7 +8,7 @@
 	import { onDestroy, onMount } from "svelte";
 	import { browser } from "$app/environment";
 	import type Status from "$lib/types/status";
-	import { token, notes, server_url } from "$lib/store";
+	import { token, notes, server_url, notes_order } from "$lib/store";
     import { page } from "$app/stores";
 
     if (browser) {
@@ -19,6 +19,9 @@
 
             $page.data.statuses.forEach((status: Status) => {
                 $notes.set(status.id, status);
+                notes_order.update((arr: string[]) => {
+                    return [...arr, status.id];
+                });
             });
 
             let params = new URLSearchParams({
@@ -40,11 +43,16 @@
                 let e = JSON.parse(event.data)
                 switch (e.event) {
                     case "update":
+                        let note = JSON.parse(e.payload) as Status;
                         notes.update((n) => {
-                            let note = JSON.parse(e.payload) as Status;
                             n.set(note.id, note);
                             return n;
                         })
+                        notes_order.update((arr: string[]) => {
+                            return [note.id, ...arr];
+                        })
+                        $notes = $notes;
+                        $notes_order = $notes_order;
                         break;
                 }
             };

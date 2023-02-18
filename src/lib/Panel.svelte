@@ -2,7 +2,7 @@
     <div class="panel">
         <PanelHeader />
         <div class="panel-content">
-            {#each [...$notes.keys()] as k}
+            {#each $notes_order as k}
                 {#if typeof $notes.get(k) !== "undefined"}
                     <Note note={$notes.get(k)} />
                 {/if}
@@ -38,5 +38,5 @@
 <script lang="ts">
     import PanelHeader from "$lib/PanelHeader.svelte";
     import Note from "./Note.svelte";
-    import { notes } from "./store";
+    import { notes, notes_order } from "./store";
 </script>
