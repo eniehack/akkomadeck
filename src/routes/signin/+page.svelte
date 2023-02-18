@@ -5,7 +5,10 @@
 </div>
 
 <script lang="ts">
-	import { ClientStorageItemSerializer } from "$lib/localstorage";
+	import { browser } from "$app/environment";
+
+    if (browser) {
+    import { ClientStorageItemSerializer } from "$lib/localstorage";
     import { create_client, authorize_url } from "$lib/oauth";
     let instance_name: string;
 
@@ -47,4 +50,5 @@
 
         location.href = authorize_url(server_url, resp.client_id, client_url).toString()
     }
+}
 </script>
