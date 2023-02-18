@@ -2,7 +2,11 @@
     <div class="panel">
         <PanelHeader />
         <div class="panel-content">
-            <slot />
+            {#each [...$notes.keys()] as k}
+                {#if $notes.has(k)}
+                    <Note note={$notes.get(k)} />
+                {/if}
+            {/each}
         </div>
     </div>
 </div>
@@ -31,6 +35,8 @@
 }
 </style>
 
-<script>
- import PanelHeader from "$lib/PanelHeader.svelte";
+<script lang="ts">
+    import PanelHeader from "$lib/PanelHeader.svelte";
+    import Note from "./Note.svelte";
+    import { notes } from "./store";
 </script>
