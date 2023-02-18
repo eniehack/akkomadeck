@@ -8,13 +8,15 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		adapter: adapter({
-			pages: "build",
-			assets: "build",
-			fallback: null,
-			precompress: false,
-			strict: true,
-		}),
+		adapter: import.meta.env.VITE_VERCEL_URL === undefined
+			? adapter({
+				pages: "build",
+				assets: "build",
+				fallback: null,
+				precompress: false,
+				strict: true,
+			})
+			: adapter({}),
 		prerender: {
 			entries: [
 				"/",
