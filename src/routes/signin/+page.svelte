@@ -14,6 +14,7 @@
         let server_url = new URL(`https://${instance_name}/`);
         console.log(server_url.toString());
         let client_url_str = import.meta.env.PROD ? import.meta.env.CLIENT_URL : "http://localhost:5173";
+        console.log(client_url_str);
         let client_url = new URL(client_url_str)
         let resp = await create_client(server_url, client_url);
         if (resp === null) {
