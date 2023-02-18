@@ -5,29 +5,26 @@
 <script lang="ts">
     import PanelsContainer from "$lib/PanelsContainer.svelte";
     import Panel from "$lib/Panel.svelte";
-	import { UserStorageItemParse } from "$lib/localstorage";
 	import { onDestroy, onMount } from "svelte";
 	import { browser } from "$app/environment";
 	import type Status from "$lib/types/status";
 	import { token, notes, server_url } from "$lib/store";
+    import { page } from "$app/stores";
 
     if (browser) {
         let ws: WebSocket;
         onMount(() => {
-            let user_str = localStorage.getItem("user");
-            if (user_str === null) return;
+            token.set($page.data.user.token);
+            server_url.set(new URL($page.data.user.server_url));
 
-            let user = UserStorageItemParse(user_str);
-            if (typeof user === "undefined") return;
-
-            token.set(user.token);
-            server_url.set(new URL(user.server_url));
-
+            $page.data.statuses.forEach((status: Status) => {
+                $notes.set(status.id, status);
+            });
 
             let params = new URLSearchParams({
-                access_token: user.token,
+                access_token: $token,
             });
-            let ws_url = new URL(user.server_url);
+            let ws_url = new URL($server_url);
             ws_url.protocol = "wss:";
             ws_url.pathname = "/api/v1/streaming";
             ws_url.search = params.toString();
@@ -51,7 +48,8 @@
                         break;
                 }
             };
-        });
+        
+        })
 
         onDestroy(()=>{
             ws.close();

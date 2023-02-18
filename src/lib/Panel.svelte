@@ -3,7 +3,7 @@
         <PanelHeader />
         <div class="panel-content">
             {#each [...$notes.keys()] as k}
-                {#if $notes.has(k)}
+                {#if typeof $notes.get(k) !== "undefined"}
                     <Note note={$notes.get(k)} />
                 {/if}
             {/each}
