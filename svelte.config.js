@@ -14,7 +14,14 @@ const config = {
 			fallback: null,
 			precompress: false,
 			strict: true,
-		})
+		}),
+		prerender: {
+			entries: [
+				"/",
+				"/signin",
+				"/signin/callback"
+			]
+		}
 	}
 };
 
