@@ -9,13 +9,6 @@ const config = {
 
 	kit: {
 		adapter: adapter({}),
-		prerender: {
-			entries: [
-				"/",
-				"/signin",
-				"/signin/callback"
-			]
-		}
 	}
 };
 
