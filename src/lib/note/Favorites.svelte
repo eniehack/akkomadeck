@@ -35,6 +35,7 @@
             return;
         }
 
-        return await favourited_by_status.json() as Account;
+        let favorityer = await favourited_by_status.json() as Account[];
+        fav_count = favorityer.length;
     }
 </script>

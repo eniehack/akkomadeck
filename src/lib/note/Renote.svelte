@@ -34,6 +34,7 @@
             return;
         }
 
-        return await reblogged_by_status.json() as Account;
+        let rebloggers = await reblogged_by_status.json() as Account[];
+        renote_count = rebloggers.length;
     }
 </script>
