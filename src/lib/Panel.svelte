@@ -4,7 +4,11 @@
         <div class="panel-content">
             {#each $notes_order as k}
                 {#if typeof $notes.get(k) !== "undefined"}
-                    <Note note={$notes.get(k)} />
+                    {#if ($notes.get(k))?.reblog === null }
+                        <Note note={$notes.get(k)} />
+                    {:else}
+                        <Renote note={$notes.get(k)} />
+                    {/if}
                 {/if}
             {/each}
         </div>
@@ -38,5 +42,6 @@
 <script lang="ts">
     import PanelHeader from "$lib/PanelHeader.svelte";
     import Note from "./Note.svelte";
+    import Renote from "./Renote.svelte";
     import { notes, notes_order } from "./store";
 </script>
