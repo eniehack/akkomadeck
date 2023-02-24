@@ -15,6 +15,8 @@
         submit = async () => {
             let server_url = new URL(`https://${instance_name}/`);
             let client_url_str: string;
+            console.debug(import.meta.env.VITE_VERCEL)
+            console.debug(import.meta.env.VITE_VERCEL_URL)
             if (import.meta.env.PROD) {
                 if (import.meta.env.VITE_VERCEL === "1") {
                     client_url_str = import.meta.env.VITE_VERCEL_URL
