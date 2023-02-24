@@ -8,24 +8,15 @@
 	import { browser } from "$app/environment";
 	import { ClientStorageItemSerializer } from "$lib/localstorage";
     import { create_client, authorize_url } from "$lib/oauth";
-    import { VITE_PUBLIC_CLIENT_HOST, VITE_PUBLIC_VERCEL_URL } from "$env/static/public";
+    import { VITE_PUBLIC_CLIENT_HOST } from "$env/static/public";
     let instance_name: string;
     let submit: () => Promise<void>;
-    let client_url_str: string = (() => {
-        if (typeof VITE_PUBLIC_CLIENT_HOST === "undefined") {
-            return VITE_PUBLIC_VERCEL_URL
-        } else {
-            return VITE_PUBLIC_CLIENT_HOST
-        }
-    })();
-
 
     if (browser) {
         submit = async () => {
             let server_url = new URL(`https://${instance_name}/`);
-            console.log(client_url_str);
-            console.log(import.meta.env.VITE_CLIENT_HOST);
-            let client_url = new URL(`https://${client_url_str}`)
+            console.log(VITE_PUBLIC_CLIENT_HOST);
+            let client_url = new URL(`https://${VITE_PUBLIC_CLIENT_HOST}`)
             if (client_url.hostname === "localhost") {
                 client_url.protocol = "http:";
             }
