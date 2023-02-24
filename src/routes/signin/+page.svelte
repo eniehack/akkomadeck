@@ -5,32 +5,39 @@
 </div>
 
 <script lang="ts">
+	import { browser } from "$app/environment";
 	import { ClientStorageItemSerializer } from "$lib/localstorage";
     import { create_client, authorize_url } from "$lib/oauth";
+    import { VITE_PUBLIC_CLIENT_HOST } from "$env/static/public";
     let instance_name: string;
+    let submit: () => Promise<void>;
 
+    if (browser) {
+        submit = async () => {
+            let server_url = new URL(`https://${instance_name}/`);
+            console.log(VITE_PUBLIC_CLIENT_HOST);
+            let client_url = new URL(`https://${VITE_PUBLIC_CLIENT_HOST}`)
+            if (client_url.hostname === "localhost") {
+                client_url.protocol = "http:";
+            }
+            console.log(client_url)
+            let resp = await create_client(server_url, client_url);
+            if (resp === null) {
+                console.error("create_client: something went wrong");
+                return
+            }
 
-    const submit = async () => {
-        let server_url = new URL(`https://${instance_name}/`);
-        console.log(server_url.toString());
-        let client_url_str = import.meta.env.PROD ? import.meta.env.CLIENT_URL : "http://localhost:5173";
-        let client_url = new URL(client_url_str)
-        let resp = await create_client(server_url, client_url);
-        if (resp === null) {
-            console.error("create_client: something went wrong");
-            return
+            localStorage.setItem(
+                "client",
+                ClientStorageItemSerializer({
+                    client_id: resp.client_id,
+                    client_secret: resp.client_secret,
+                    server_url: server_url,
+                    client_host: client_url,
+                })
+            );
+
+            location.href = authorize_url(server_url, resp.client_id, client_url).toString()
         }
-
-        localStorage.setItem(
-            "client",
-            ClientStorageItemSerializer({
-                client_id: resp.client_id,
-                client_secret: resp.client_secret,
-                server_url: server_url,
-                client_host: client_url,
-            })
-        );
-
-        location.href = authorize_url(server_url, resp.client_id, client_url).toString()
     }
 </script>

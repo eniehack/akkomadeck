@@ -9,6 +9,6 @@
     if (browser) {
         let user = UserStorageItemSerializer($page.data)
         localStorage.setItem("user", user)
-        goto(import.meta.env.BASE_URL);
+        goto("/");
     }
 </script>
