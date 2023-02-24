@@ -9,6 +9,9 @@ const config = {
 
 	kit: {
 		adapter: adapter({}),
+		env: {
+			publicPrefix: "VITE_PUBLIC"
+		}
 	}
 };
 

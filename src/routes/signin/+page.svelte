@@ -8,14 +8,14 @@
 	import { browser } from "$app/environment";
 	import { ClientStorageItemSerializer } from "$lib/localstorage";
     import { create_client, authorize_url } from "$lib/oauth";
-    import { VITE_CI, VITE_CLIENT_HOST, VITE_VERCEL_URL, VITE_DEV } from "$env/static/private";
+    import { VITE_PUBLIC_CLIENT_HOST, VITE_PUBLIC_VERCEL_URL } from "$env/static/public";
     let instance_name: string;
     let submit: () => Promise<void>;
     let client_url_str: string = (() => {
-        if (VITE_CI === "1") {
-            return VITE_VERCEL_URL
-        } else if (VITE_DEV) {
-            return VITE_CLIENT_HOST
+        if (typeof VITE_PUBLIC_CLIENT_HOST === "undefined") {
+            return VITE_PUBLIC_VERCEL_URL
+        } else {
+            return VITE_PUBLIC_CLIENT_HOST
         }
     })();
 
