@@ -1,19 +1,19 @@
 import { browser } from "$app/environment";
 import type { PageLoad } from "./$types";
 import { UserStorageItemParse } from "$lib/localstorage";
-import { error } from "@sveltejs/kit";
+import { redirect } from "@sveltejs/kit";
 import type Status from "$lib/types/status";
 
 export const load = (async ({fetch}) => {
     if (browser) {
         let user_str = localStorage.getItem("user");
         if (user_str === null) {
-            throw error(500, "cannot load user data.");
+            throw redirect(303, "/signin")
         }
 
         let user = UserStorageItemParse(user_str);
         if (typeof user === "undefined") {
-            throw error(500, "cannot load user data.");
+            throw redirect(303, "/signin")
         }
 
         let resp = await fetch(`${user.server_url}api/v1/timelines/home`, {

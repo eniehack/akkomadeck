@@ -3,18 +3,25 @@ import type { PageLoad } from "./$types";
 import { browser } from "$app/environment";
 import { fetch_access_token, type OAuthClient, verify_credentials } from "$lib/oauth";
 import { ClientStorageItemParse } from "$lib/localstorage";
+import { error, redirect } from "@sveltejs/kit";
 
 export const load = (async ({ fetch, url }) => {
     if (!browser) return;
 
     const code = url.searchParams.get("code")
-    if (code === null)  return;
+    if (code === null) {
+        throw error(500, "invalid request: no code");
+    }
 
-    let client_str = localStorage.getItem("client")
-    if (client_str === null) return;
+    let client_str = localStorage.getItem("client");
+    if (client_str === null) {
+        throw redirect(303, "/signin");
+    }
 
     let client = ClientStorageItemParse(client_str)
-    if (typeof client === "undefined") return;
+    if (typeof client === "undefined") {
+        throw redirect(303, "/signin");
+    }
 
     let server_url = new URL(client.server_url)
     let resp = await fetch_access_token(
