@@ -1,38 +1,50 @@
-# create-svelte
+# akkomadeck
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+a tweetdeck-like client for akkoma(but, has some compatible for Mastodon) 
 
-## Creating a project
+demo: [from vercel.app](https://akkomadeck.vercel.app/)
 
-If you're seeing this, you've probably already done this step. Congrats!
+## features
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+- [x] boost
+- [x] favorites
+- [ ] show CW
+- [ ] post
+- [ ] emoji reaction
+- [ ] add column
+  - list TL
+  - federated TL
+  - local TL
+- [ ] customize column order
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+## goal
 
-## Developing
+- [ ] install from pleromactl
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## license
 
-```bash
-npm run dev
+copyright (c) 2023 Nakaya
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+This software is licensed by MIT License OR Affero GNU Public License 3.0 only.
+You may choose two licenses below.
 
-## Building
+but, icons are licensed by Apache License 2.0 from .
 
-To create a production version of your app:
+## how to Install
 
-```bash
-npm run build
-```
+1. clone & cd
+2. pnpm i
+3. pnpm run build
+4. You can use build directory.
 
-You can preview the production build with `npm run preview`.
+## contribute
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+1. Fork
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create a new Pull Request
+
+## contributers
+
+- [Nakaya](https://github.com/eniehack) - creator and maintainer.
