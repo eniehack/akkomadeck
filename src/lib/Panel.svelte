@@ -3,11 +3,12 @@
         <PanelHeader />
         <div class="panel-content">
             {#each $notes_order as k}
-                {#if typeof $notes.get(k) !== "undefined"}
-                    {#if ($notes.get(k))?.reblog === null }
-                        <Note note={$notes.get(k)} />
+                {@const note = $notes.get(k)}
+                {#if typeof note !== "undefined"}
+                    {#if note.reblog === null }
+                        <Note note={note} />
                     {:else}
-                        <Renote note={$notes.get(k)} />
+                        <Renote note={note} />
                     {/if}
                 {/if}
             {/each}
