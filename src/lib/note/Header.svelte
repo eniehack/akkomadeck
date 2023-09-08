@@ -1,11 +1,11 @@
 <script lang="ts">
 	import type Note from "../types/status";
-    import dayjs, { extend } from "dayjs";
+    import dayjs from "dayjs";
     import relativeTime from "dayjs/plugin/relativeTime";
 
     export let note: Note;
     
-    extend(relativeTime);
+    dayjs.extend(relativeTime);
 
     console.log(note);
 </script>
