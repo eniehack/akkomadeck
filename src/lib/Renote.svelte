@@ -22,19 +22,7 @@
     <div class="post-body">
         {@html note.content}
     </div>
-    <aside class="reaction">
-        <span class="quote">
-            quote
-        </span>
-        <Renote note_id={note.id} renote_count={note.reblogs_count}/>
-        <Favorites note_id={note.id} fav_count={note.favourites_count}/>
-        <span class="reaction">
-            reaction
-        </span>
-        <span class="fav">
-            fav
-        </span>
-    </aside>
+    <ReactionBar note={note} />
 </article>
 
 <style>
@@ -55,17 +43,11 @@
     display: flex;
     flex-direction: row;
  }
-
- .reaction {
-    display: flex;
-    flex-direction: row;
- }
 </style>
 
 <script lang="ts">
     import type Note from "./types/status";
-    import Renote from "./note/Renote.svelte"
-	import Favorites from "./note/Favorites.svelte";
+    import ReactionBar from "./note/ReactionBar.svelte";
 
     export let note: Note;
     console.log(note.reblog);
