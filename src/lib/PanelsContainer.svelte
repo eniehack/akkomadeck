@@ -1,5 +1,7 @@
 <div class="panels-container" bind:this={panels}>
+    <PanelsHeader />
     <slot />
+    <PanelsFooter />
 </div>
 
 <style>
@@ -13,7 +15,9 @@
 </style>
 
 <script lang="ts">
- import  Sortable from "sortablejs";
+    import PanelsHeader from "./PanelsHeader.svelte";
+    import PanelsFooter from "./PanelsFooter.svelte";
+    import  Sortable from "sortablejs";
  import { onMount } from "svelte";
 
  let panels: HTMLElement;
