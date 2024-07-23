@@ -1,6 +1,6 @@
 # akkomadeck
 
-a tweetdeck-like client for akkoma(but, has some compatible for Mastodon) 
+a tweetdeck-like client for akkoma(but, has some compatible for Mastodon)
 
 demo: [from vercel.app](https://akkomadeck.vercel.app/)
 

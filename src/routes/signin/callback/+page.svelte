@@ -1,14 +1,14 @@
-<p>redirecting</p>
-
 <script lang="ts">
-    import { goto } from "$app/navigation";
-    import { browser } from "$app/environment";
-	import { UserStorageItemSerializer } from "$lib/localstorage";
-    import { page } from "$app/stores";
+	import { goto } from '$app/navigation';
+	import { browser } from '$app/environment';
+	import { UserStorageItemSerializer } from '$lib/localstorage';
+	import { page } from '$app/stores';
 
-    if (browser) {
-        let user = UserStorageItemSerializer($page.data)
-        localStorage.setItem("user", user)
-        goto("/");
-    }
+	if (browser) {
+		let user = UserStorageItemSerializer($page.data);
+		localStorage.setItem('user', user);
+		goto('/');
+	}
 </script>
+
+<p>redirecting</p>
